@@ -36,7 +36,7 @@
                     <p class="text-center ">Anmälan Öppen förskola </p>
                 </div>
                 <form name="contact, google-sheet" method="POST" data-netlify="true">
-                    <div id="form_alerts">20</div>
+                    <div id="form_alerts"></div>
                     <div class="form-group mb-3">
                         <label for="name" class="form-label">Namn</label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Ditt Namn" required>
@@ -55,10 +55,11 @@
                        </label>
                     </div>
                     <div>
-                        <button class="btn btn-primary me-2" id="button" value="Decrease me" type="submit">Skicka!</button>
+                        <button class="btn btn-primary me-2" id="btnTest" onclick="javascript:decrease()" type="submit">Skicka!</button>
                         <button class="btn btn-danger" type="reset">Nollställ!</button>
                     
                     </div>
+                    <span id="spnTest">20</span>
                     <br>
                     <p>Läs mer om barn och familj!</p> <i> <u> <a href="https://www.svenskakyrkan.se/hagersten/barn-och-familj">Klicka här</a> </u></i>
            
@@ -73,13 +74,15 @@
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzETyh3RQg_282YhrizYlK-6YQTLNOBCw_ikaSUcMwULb5QXRiopC9LzbUndzGHREoB/exec'
         const form = document.forms['google-sheet']
-       
-        var oButton = document.getElementById("button");
-        var oText = document.getElementById("form_alerts");
-        var count = 20;
-        oButton.addEventListener('click', function(i, a) {
-    oText.innerHTML = count -= 1;
-}, false);
+        var ratio = 1;
+        var totalValue = 20;
+
+    function decrease(){
+    if(totalValue == 0) return;
+    totalValue -= ratio;
+    document.getElementById('spnTest').innerHTML = totalValue;
+}
+    document.getElementById('btnTest').onclick = function(){ decrease(); }
         
         form.addEventListener('submit', e => {
             e.preventDefault()
